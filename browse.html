@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="./asset/favicon.jpg" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./browse.css">
+    <script
+      src="https://kit.fontawesome.com/2e4be4e5c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Frugality Book</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar navbar-expand-lg bg-light">
+        <div class="container">
+          <div class="navbar-brand">
+            <img
+              src="./asset//bookLogo.png"
+              class="d-inline-block align-text-middle"
+              width="120"
+              alt=""
+            />
+          </div>
+          <button
+            class="navbar-toggler collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menu"
+            aria-controls="menu"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i style="font-size: 1.8rem" class="fa-solid fa-bars"></i>
+          </button>
+          <div
+            class="collapse navbar-collapse d-lg-flex justify-content-end"
+            id="menu"
+          >
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="./index.html">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Category
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="dropdown-item" href="#"
+                      >Self-Help</a>
+                  </li>
+                  <li><a class="dropdown-item" href="#">Horror</a></li>
+                  <li><a class="dropdown-item" href="#">Romance</a></li>
+                  <li><a class="dropdown-item" href="#">Psychology</a></li>
+                </ul>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" style="color: #46b7d5">Browse</a>
+              </li>
+              <li class="nav-item">
+                <a href="./about-us.html" class="nav-link">About-us</a>
+              </li>
+              <form class="d-flex " role="search">
+                <input onchange="handleSearch()" class="form-control me-2 search" type="text" placeholder="Search" aria-label="Search">
+                <button onclick="handleClickSearch()" class="btn btn-outline-success" id="searchBTN" type="button">Search</button>
+              </form>
+            </ul>
+          </div>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+                      <input type="email" id="form2Example1" class="form-control" />
+                      <label class="form-label" for="form2Example1">Email address</label>
+                    </div>
+                  
+                    <!-- Password input -->
+                    <div class="form-outline mb-4">
+                      <input type="password" id="form2Example2" class="form-control" />
+                      <label class="form-label" for="form2Example2">Password</label>
+                    </div>
+                  
+                    <!-- 2 column grid layout for inline styling -->
+                    <div class="row mb-4">
+                      <div class="col d-flex justify-content-center">
+                        <!-- Checkbox -->
+                        <div class="form-check">
+                          <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
+                          <label class="form-check-label" for="form2Example31"> Remember me </label>
+                        </div>
+                      </div>
+                  
+                      <div class="col">
+                        <!-- Simple link -->
+                        <a href="#!">Forgot password?</a>
+                      </div>
+                    </div>
+                  
+                    <!-- Submit button -->
+                    <div class="text-center">
+                      <button type="button" style="color: white;background-color: #46b7d5; border: none;" class="btn btn-primary btn-block mb-4">Login</button>
+                      </div>          
+                  
+                    <!-- Register buttons -->
+                    <div class="text-center">
+                      <p>Not a member? <a href="#!">Register</a></p>
+                      <p>or sign up with:</p>
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-facebook-f"></i>
+                      </button>
+                  
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-google"></i>
+                      </button>
+                  
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-twitter"></i>
+                      </button>
+                  
+                      <button type="button" class="btn btn-link btn-floating mx-1">
+                        <i class="fab fa-github"></i>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Part -->
+<div style="padding: 15px;">
+  <h3 class="text-center">Browse   <span style="color: #46b7d5;">all the book</span><h3>
+  <span class="text-center" style="text-align: center; font-size: 1.1rem;display: block;">Freshly new arriving book.</span>
+  <div class="container">
+    <div class="row gy-3 my-3 show" >
+    </div>
+  </div>
+</div>
+<script>
+    var bookInfor = [
+    {
+        url: "https://m.media-amazon.com/images/I/51OOCVBfCQL._SX377_BO1,204,203,200_.jpg",
+        title: "Phyton Crash Course",
+        author: "Eric Matthes",
+        price: "15$",
+        category: "Programming",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/51F8Q2HHw-L.jpg",
+        title: "Javascript Book",
+        author: "Code Quickly",
+        price: "12$",
+        category: "Programming",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/417ExARdRYL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
+        title: "Data Structure",
+        author: "Narasimha",
+        price: "12$",
+        category: "Programming",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/61eVQpgRrvL.jpg",
+        title: "C++ Programming",
+        author: "Malik",
+        price: "12$",
+        category: "Programming",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/61yRxqI4WfL.jpg",
+        title: "C# Programming",
+        author: "Mark Reed",
+        price: "12$",
+        category: "Programming",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/612njtDEeCL._AC_UY436_FMwebp_QL65_.jpg",
+        title: "ASP.net",
+        author: "Joce",
+        price: "12$",
+        category: "Programming",
+    },
+    {
+      url: "https://images-na.ssl-images-amazon.com/images/I/81D-gdnku+L.jpg",
+      title: "They Both Die at the End",
+      author: "Adam Silvera",
+      price: "10$",
+      category: "Romance Horror",
+    },
+    {
+        url: "https://images-na.ssl-images-amazon.com/images/I/71I0yJf5h8L.jpg",
+      title: "To all the boys I've loved before",
+      author: "Jenny Han",
+      price: "10$",
+      category: "Romance",
+    },
+    {
+        url: "https://images-na.ssl-images-amazon.com/images/I/61JS5pSCQqL.jpg",
+        title: "P.S. I still love you",
+        author: "Jenny Han",
+        price: "10$",
+        category: "Romance",
+    },
+    {
+        url: "https://images-na.ssl-images-amazon.com/images/I/71aKL1ss9KL.jpg",
+      title: "Always and Forever",
+      author: "Jenny Han",
+      price: "10$",
+      category: "Romance",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/41nngxCNKxL.jpg",
+        title: "IT",
+        author: "Stphen King",
+        price: "10$",
+        category: "Horror",
+    },
+    {
+        url: "https://images-na.ssl-images-amazon.com/images/I/81uQocUlNcL.jpg",
+        title: "Green Mile",
+        author: "Stephen King",
+        price: "10$",
+        category: "Crime",
+    },
+    {
+        url: "http://prodimage.images-bn.com/pimages/9780345806789_p0_v2_s1200x630.jpg",
+        title: "The Shinning",
+        author: "Stephen King",
+        price: "10$",
+        category: "Horror",
+    },
+    {
+        url: "https://m.media-amazon.com/images/I/41tATg+hmiL.jpg",
+        title: "The Long Walk",
+        author: "Stephen King",
+        price: "10$",
+        category: "Horror",
+    },
+    {
+      url: "https://m.media-amazon.com/images/I/51jv4ITqI6L.jpg",
+      title: "The Outsider",
+      author: "Stephen King",
+      price: "10$",
+      category: "Horror",
+    },
+    {
+        url: "https://images-na.ssl-images-amazon.com/images/I/918KkftCUFL.jpg",
+        title: "13 Reasons Why",
+        author: "Jay Asher",
+        price: "10$",
+        category: "Romance",
+    },
+    {
+        url: "https://images-na.ssl-images-amazon.com/images/I/81zqDem9OvL.jpg",
+        title: "Salem's Lot",
+        author: "Stephen King",
+        price: "10$",
+        category: "Horror",
+    },
+];
+var show = document.getElementsByClassName("show")[0];
+bookInfor.map((item,index)=>{
+        show.innerHTML = show.innerHTML+
+        `
+        <div class="col-sm-6 col-md-4 col-lg-3 ">
+        <div class="card card-self"  >
+        <img
+        style="width: 160px; margin: auto;"
+        class="card-img-top"
+        src="${item.url}"
+        alt="Card image cap"
+        />
+        <div class="text-center" ">
+        <span class="card-title" style="margin-bottom: 0;">${item.title}</span>
+        <span style="font-size: .9rem;display:block">${item.category}</span>
+        <span style="font-size: .9rem;">${item.author}</span>
+        <span style="font-size: .9rem; display: block;">${item.price}</span>
+        <a href="#" class="btn btn-primary CBTN">Add to cart</a>
+            </div>
+        </div>
+        </div>
+            `
+        })
+function handleClickSearch(){
+    var show = document.getElementsByClassName("show")[0];
+    show.innerHTML=""
+    var search = document.getElementsByClassName("search")[0].value
+    search =search.toLowerCase();
+    bookInfor.filter((item)=>item.title.toLowerCase().includes(search)||item.category.toLowerCase().includes(search)).map((item,index)=>{
+        show.innerHTML = show.innerHTML+
+        `
+        <div class="col-sm-6 col-md-4 col-lg-3 ">
+  <div class="card card-self"  >
+    <img
+    style="width: 160px; margin: auto;"
+      class="card-img-top"
+      src="${item.url}"
+      alt="Card image cap"
+    />
+    <div class="text-center" ">
+      <span class="card-title" style="margin-bottom: 0;">${item.title}</span>
+      <span style="font-size: .9rem;display:block">${item.category}</span>
+      <span style="font-size: .9rem;">${item.author}</span>
+      <span style="font-size: .9rem; display: block;">${item.price}</span>
+      <a href="#" class="btn btn-primary CBTN">Add to cart</a>
+    </div>
+  </div>
+</div>
+        `
+    })
+}
+function handleSearch(){
+    var search  = document.getElementsByClassName("search")[0].value;
+    var show = document.getElementsByClassName("show")[0];
+  show.innerHTML=""
+    if(search==""){
+        bookInfor.map((item,index)=>{
+        show.innerHTML = show.innerHTML+
+        `
+        <div class="col-sm-6 col-md-4 col-lg-3 ">
+        <div class="card card-self"  >
+        <img
+        style="width: 160px; margin: auto;"
+        class="card-img-top"
+        src="${item.url}"
+        alt="Card image cap"
+        />
+        <div class="text-center" ">
+        <span class="card-title" style="margin-bottom: 0;">${item.title}</span>
+        <span style="font-size: .9rem;display:block">${item.category}</span>
+        <span style="font-size: .9rem;">${item.author}</span>
+        <span style="font-size: .9rem; display: block;">${item.price}</span>
+        <a href="#" class="btn btn-primary CBTN">Add to cart</a>
+            </div>
+        </div>
+        </div>
+            `
+        })
+    }
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
